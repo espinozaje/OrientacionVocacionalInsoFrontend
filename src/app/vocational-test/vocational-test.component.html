@@ -1,0 +1,59 @@
+<div class="test-vocacional">
+  <div class="header">
+    <div class="logo-container">
+      <a routerLink="/home"><img src="https://i.pinimg.com/736x/bb/24/f4/bb24f440990ac516ed9a2796510744b0.jpg" alt="T-UPAO" class="logo" /></a>
+      <span class="logo-text">T-UPAO</span>
+    </div>
+  </div>
+<div *ngIf="questions && questions.length > 0">
+  <h1>Test Vocacional</h1>
+
+  <div class="progress-bar-container">
+    <div class="progress-bar">
+      <div class="progress" [style.width]="getProgress() + '%'"></div>
+    </div>
+  </div>
+  <div class="content-container">
+
+    <img src="https://uniscopio.com/wp-content/uploads/2019/11/Habitos-de-Estudio.png" alt="Imagen Pregunta" class="question-image" width="220" height="auto" />
+
+    <div *ngIf="currentQuestionIndex < questions.length; else showResult" class="question-container">
+      <h3>Pregunta {{ currentQuestionIndex + 1 }} de {{ questions.length }}</h3>
+      <p>{{ questions[currentQuestionIndex].texto }}</p>
+      
+      <div class="button-container">
+        <button *ngFor="let option of questions[currentQuestionIndex].opciones" 
+                (click)="selectOption(option)" class="btn btn-interes">
+          {{ option.texto }}
+        </button>
+      </div>
+    </div>
+  
+  </div>
+
+
+  <ng-template #showResult>
+    <div class="result-card">
+      <h3>Resultado del Test Vocacional</h3>
+      <p> {{ testResult }}</p>
+    </div>
+
+    <button class="btn btn-interes"><a routerLink="/home">Volver al inicio</a></button>
+  </ng-template>
+</div>
+
+  
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
