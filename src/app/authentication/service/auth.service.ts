@@ -8,7 +8,7 @@ import { response } from 'express';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/v1/auth'; 
+  private apiUrl = 'https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/auth'; 
 
   constructor(private http: HttpClient) { }
 

@@ -26,12 +26,12 @@ export class PagePrincipalComponent {
 
   // Método para cargar todas las carreras
   loadCarreras(): void {
-    this.http.get<any[]>('http://localhost:8080/api/v1/carreras/mostrarcarreras')
+    this.http.get<any[]>('https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/mostrarcarreras')
       .subscribe(carreras => this.carreras = carreras);
   }
 
   loadUbicaciones(): void {
-    this.http.get<any[]>('http://localhost:8080/api/v1/carreras/mostrarubicaciones')
+    this.http.get<any[]>('https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/mostrarubicaciones')
       .subscribe(ubicaciones => this.ubicaciones = ubicaciones);
   }
 
@@ -40,7 +40,7 @@ export class PagePrincipalComponent {
     const target = event.target as HTMLSelectElement;
     const carreraId = target.value;
     if (carreraId) {
-      this.http.get<any>(`http://localhost:8080/api/v1/carreras/carreraporID/${carreraId}`)
+      this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
         .subscribe(carrera => this.carreraSeleccionada1 = carrera); // Asignar la primera carrera seleccionada
     }
   }
@@ -50,7 +50,7 @@ export class PagePrincipalComponent {
     const target = event.target as HTMLSelectElement;
     const carreraId = target.value;
     if (carreraId) {
-      this.http.get<any>(`http://localhost:8080/api/v1/carreras/carreraporID/${carreraId}`)
+      this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
         .subscribe(carrera => this.carreraSeleccionada2 = carrera); // Asignar la segunda carrera seleccionada
     }
   }

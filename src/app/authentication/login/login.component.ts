@@ -28,7 +28,7 @@ export class LoginComponent {
         .set('password', password);  //crea parametros para se usaran para enviar en la solicitud
   
      
-      this.http.post('http://localhost:8080/api/v1/auth/login', null, {  //realiza la solicitud, null es que no se envia el cuerpo de la solicitud ya que se envian como parametros
+      this.http.post('https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/auth/login', null, {  //realiza la solicitud, null es que no se envia el cuerpo de la solicitud ya que se envian como parametros
           params, 
           responseType: 'text'
         })

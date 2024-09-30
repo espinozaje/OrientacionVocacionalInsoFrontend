@@ -7,7 +7,7 @@ import { Ubicacion } from '../authentication/models/question.model';
   providedIn: 'root'
 })
 export class HomePageService {
-  private apiUrl = 'http://localhost:8080/api/v1/carreras'; 
+  private apiUrl = 'https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras'; 
 
   constructor(private http: HttpClient) { }
 

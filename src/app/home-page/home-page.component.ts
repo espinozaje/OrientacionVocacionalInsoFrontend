@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
   }
 
   loadUbicaciones(): void {
-    this.http.get<any[]>('http://localhost:8080/api/v1/carreras/mostrarubicaciones')
+    this.http.get<any[]>('https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/mostrarubicaciones')
       .subscribe(ubicaciones => this.ubicaciones = ubicaciones);
   }
 
@@ -32,7 +32,7 @@ export class HomePageComponent implements OnInit {
     const target = event.target as HTMLSelectElement; //castea el evento para obtener el objetivo como un elemento tipo HTMLSelectElemnt
     const ubicacionId = target.value; //obtiene el valor seleccionado en este cado el id de la ubi
     if (ubicacionId) { //si hay un id se realiza la solicitud
-      this.http.get<any[]>(`http://localhost:8080/api/v1/carreras/porubicacion/${ubicacionId}`)
+      this.http.get<any[]>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/porubicacion/${ubicacionId}`)
         .subscribe(carreras => this.carreras = carreras);
     }
   }

@@ -27,7 +27,7 @@ export class RegisterComponent {
         password
       };
 
-      this.http.post('http://localhost:8080/api/v1/auth/register', requestBody)
+      this.http.post('https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/auth/register', requestBody)
       .subscribe(
         (response: any) => { 
           console.log('Registro exitoso:', response);

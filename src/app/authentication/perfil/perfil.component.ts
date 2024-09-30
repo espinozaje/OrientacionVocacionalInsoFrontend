@@ -25,7 +25,7 @@ export class PerfilComponent implements OnInit {
   }
 
   loadUser(id: string): void {
-    this.http.get<any>(`http://localhost:8080/api/v1/auth/obtener/${id}`)  //realiza ls solicitud a la API y espera un objeto del tipo any
+    this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/auth/obtener/${id}`)  //realiza ls solicitud a la API y espera un objeto del tipo any
       .subscribe(  //maneja la respues de la solicitud si tiene exito asigna el usuario a la propiedad user sino si hay error lo registra en la consola
         user => this.user = user,
         error => console.error('Error al cargar usuario:', error)
@@ -33,7 +33,7 @@ export class PerfilComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.http.put(`http://localhost:8080/api/v1/auth/update/${this.user.id}`, this.user, { responseType: 'text' })
+    this.http.put(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/auth/update/${this.user.id}`, this.user, { responseType: 'text' })
       .subscribe(
         response => {
           console.log('Usuario actualizado:', response);
