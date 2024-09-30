@@ -7,7 +7,7 @@ import { Question } from '../authentication/models/question.model';
   providedIn: 'root'
 })
 export class VocationalTestService {
-  private apiUrl = 'http://localhost:8080/api/v1/vocational-test';
+  private apiUrl = 'https://orientacionvocacionalinsoapi-production.up.railway.app//api/v1/vocational-test';
 
   constructor(private http: HttpClient) {}
 
