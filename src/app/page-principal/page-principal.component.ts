@@ -53,7 +53,7 @@ export class PagePrincipalComponent {
       this.carreraSeleccionada1 = null;
     } else {
       // Comprobar si hay una carrera seleccionada
-      this.http.get<any>(`http://localhost:8080/api/v1/carreras/carreraporID/${carreraId}`)
+      this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
         .subscribe(carrera => {
           this.carreraSeleccionada1 = carrera; // Asignar la primera carrera seleccionada
           // Limpiar la selección de carrera 2 si coincide
@@ -74,7 +74,7 @@ export class PagePrincipalComponent {
       this.carreraSeleccionada2 = null;
     } else {
       // Comprobar si hay una carrera seleccionada
-      this.http.get<any>(`http://localhost:8080/api/v1/carreras/carreraporID/${carreraId}`)
+      this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
         .subscribe(carrera => {
           this.carreraSeleccionada2 = carrera; // Asignar la segunda carrera seleccionada
           // Limpiar la selección de carrera 1 si coincide
