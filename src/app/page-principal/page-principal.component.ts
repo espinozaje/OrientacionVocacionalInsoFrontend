@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../authentication/service/auth.service';
 import { User } from '../authentication/models/question.model';
+
 @Component({
   selector: 'app-page-principal',
   standalone: true,
@@ -28,6 +29,7 @@ export class PagePrincipalComponent {
     this.loadCarreras(); // Cargar todas las carreras al iniciar el componente
     this.loadUbicaciones();
     this.getinfo();
+    this.ngAfterViewInit();
   }
 
   // Método para cargar todas las carreras
