@@ -51,6 +51,9 @@ export class PagePrincipalComponent {
       this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
         .subscribe(carrera => this.carreraSeleccionada1 = carrera); // Asignar la primera carrera seleccionada
     }
+    if (this.carreraSeleccionada2 && this.carreraSeleccionada2.id === carreraId) {
+      this.carreraSeleccionada2 = null;
+    }
   }
 
   // Método para manejar el cambio de selección de la segunda carrera
@@ -61,6 +64,12 @@ export class PagePrincipalComponent {
       this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
         .subscribe(carrera => this.carreraSeleccionada2 = carrera); // Asignar la segunda carrera seleccionada
     }
+  }
+
+  get filteredCarreras() {
+    return this.carreras.filter(carrera => 
+      !this.carreraSeleccionada1 || carrera.id !== this.carreraSeleccionada1.id
+    );
   }
 
   logout():void{ 

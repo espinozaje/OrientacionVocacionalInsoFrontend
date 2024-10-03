@@ -48,56 +48,50 @@
 
         <div class="recent-orders">
             <h1>Comparacion de carreras</h1>
-        <div class="filter-section">
-        
-        <div class="filter">
-        <label for="carrera1">Elija la primera carrera a comparar:</label>
-        <select id="carrera1" (change)="onCarrera1Change($event)">
-        <option>Seleccionar Carrera</option>
-        <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
-        </select>
-        </div>
-        
-        
-        <div class="filter">
-        <label for="carrera2">Elija la segunda carrera a comparar:</label>
-        <select id="carrera2" (change)="onCarrera2Change($event)">
-        <option>Seleccionar Carrera</option>
-        <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
-        </select>
-        </div>
-        </div>
-        
-        <div class="careers">
-        
-        <div *ngIf="carreraSeleccionada1; else emptyCard1" class="card">
-        <h3>{{ carreraSeleccionada1.nombre }}</h3>
-        <img [src]="carreraSeleccionada1.img" alt="">
-        <h3>{{ carreraSeleccionada1.ubicacion.ciudad }}</h3>
-        <p>{{carreraSeleccionada1.descripcion}}</p>
-        <h3>Precio Mensual: </h3><p>{{carreraSeleccionada1.precioMensualidad}}</p>
-        </div>
-        
-        
-        <ng-template #emptyCard1>
-        <div class="empty-card">Selecciona una carrera</div>
-        </ng-template>
-        
-        
-        <div *ngIf="carreraSeleccionada2; else emptyCard2" class="card">
-        <h3>{{ carreraSeleccionada2.nombre }}</h3>
-        
-        <img [src]="carreraSeleccionada2.img" alt="">
-        <h3>{{ carreraSeleccionada2.ubicacion.ciudad }}</h3>
-        <p>{{carreraSeleccionada2.descripcion}}</p>
-        <h3>Precio Mensual: </h3><p>{{carreraSeleccionada2.precioMensualidad}}</p>
-        </div>
-        
-        
-        <ng-template #emptyCard2>
-        <div class="empty-card">Selecciona una carrera</div>
-        </ng-template>
-        </div>
+            <div class="filter-section">
+                
+                <div class="filter">
+                    <label for="carrera1">Elija la primera carrera a comparar:</label>
+                    <select id="carrera1" (change)="onCarrera1Change($event)">
+                        <option>Seleccionar Carrera</option>
+                        <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
+                    </select>
+                </div>
+                
+                <div class="filter">
+                    <label for="carrera2">Elija la segunda carrera a comparar:</label>
+                    <select id="carrera2" (change)="onCarrera2Change($event)">
+                        <option>Seleccionar Carrera</option>
+                        <option *ngFor="let carrera of filteredCarreras()" [value]="carrera.id">{{ carrera.nombre }}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="careers">
+                <div *ngIf="carreraSeleccionada1; else emptyCard1" class="card">
+                    <h3>{{ carreraSeleccionada1.nombre }}</h3>
+                    <img [src]="carreraSeleccionada1.img" alt="">
+                    <h3>{{ carreraSeleccionada1.ubicacion.ciudad }}</h3>
+                    <p>{{ carreraSeleccionada1.descripcion }}</p>
+                    <h3>Precio Mensual:</h3><p>{{ carreraSeleccionada1.precioMensualidad }}</p>
+                </div>
+                
+                <ng-template #emptyCard1>
+                    <div class="empty-card">Selecciona una carrera</div>
+                </ng-template>
+                
+                <div *ngIf="carreraSeleccionada2; else emptyCard2" class="card">
+                    <h3>{{ carreraSeleccionada2.nombre }}</h3>
+                    <img [src]="carreraSeleccionada2.img" alt="">
+                    <h3>{{ carreraSeleccionada2.ubicacion.ciudad }}</h3>
+                    <p>{{ carreraSeleccionada2.descripcion }}</p>
+                    <h3>Precio Mensual:</h3><p>{{ carreraSeleccionada2.precioMensualidad }}</p>
+                </div>
+                
+                <ng-template #emptyCard2>
+                    <div class="empty-card">Selecciona una carrera</div>
+                </ng-template>
+            </div>
         </div>
     </main>
 
