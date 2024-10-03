@@ -47,12 +47,20 @@ export class PagePrincipalComponent {
   onCarrera1Change(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const carreraId = target.value;
-    if (carreraId) {
-      this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
-        .subscribe(carrera => this.carreraSeleccionada1 = carrera); // Asignar la primera carrera seleccionada
-    }
-    if (this.carreraSeleccionada2 && this.carreraSeleccionada2.id === carreraId) {
-      this.carreraSeleccionada2 = null;
+
+    // Si la opción seleccionada es "Seleccionar Carrera", limpiar la selección
+    if (carreraId === "Seleccionar Carrera") {
+      this.carreraSeleccionada1 = null;
+    } else {
+      // Comprobar si hay una carrera seleccionada
+      this.http.get<any>(`http://localhost:8080/api/v1/carreras/carreraporID/${carreraId}`)
+        .subscribe(carrera => {
+          this.carreraSeleccionada1 = carrera; // Asignar la primera carrera seleccionada
+          // Limpiar la selección de carrera 2 si coincide
+          if (this.carreraSeleccionada2 && this.carreraSeleccionada2.id === carreraId) {
+            this.carreraSeleccionada2 = null;
+          }
+        });
     }
   }
 
@@ -60,24 +68,22 @@ export class PagePrincipalComponent {
   onCarrera2Change(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const carreraId = target.value;
-    if (carreraId) {
+
+    // Si la opción seleccionada es "Seleccionar Carrera", limpiar la selección
+    if (carreraId === "Seleccionar Carrera") {
+      this.carreraSeleccionada2 = null;
+    } else {
+      // Comprobar si hay una carrera seleccionada
       this.http.get<any>(`http://localhost:8080/api/v1/carreras/carreraporID/${carreraId}`)
         .subscribe(carrera => {
           this.carreraSeleccionada2 = carrera; // Asignar la segunda carrera seleccionada
-          // Resetea la primera carrera si es igual a la segunda seleccionada
+          // Limpiar la selección de carrera 1 si coincide
           if (this.carreraSeleccionada1 && this.carreraSeleccionada1.id === carreraId) {
             this.carreraSeleccionada1 = null;
           }
         });
     }
   }
-
-
-  clearSelections(): void {
-    this.carreraSeleccionada1 = null;
-    this.carreraSeleccionada2 = null;
-  }
-
 
   get filteredCarreras() {
     return this.carreras.filter(carrera => 
