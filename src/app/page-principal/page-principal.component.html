@@ -62,7 +62,7 @@
                     <label for="carrera2">Elija la segunda carrera a comparar:</label>
                     <select id="carrera2" (change)="onCarrera2Change($event)">
                         <option>Seleccionar Carrera</option>
-                        <option *ngFor="let carrera of filteredCarreras()" [value]="carrera.id">{{ carrera.nombre }}</option>
+                        <option *ngFor="let carrera of filteredCarreras" [value]="carrera.id">{{ carrera.nombre }}</option>
                     </select>
                 </div>
             </div>
