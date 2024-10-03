@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../authentication/service/auth.service';
@@ -13,6 +13,10 @@ import { User } from '../authentication/models/question.model';
   styleUrl: './page-principal.component.scss'
 })
 export class PagePrincipalComponent {
+  @ViewChild('sideMenu', { static: false }) sideMenu!: ElementRef;
+  @ViewChild('menuBtn', { static: false }) menuBtn!: ElementRef;
+  @ViewChild('closeBtn', { static: false }) closeBtn!: ElementRef;
+  @ViewChild('themeToggler', { static: false }) themeToggler!: ElementRef;
   ubicaciones: any[] = []; // Arreglo vacío para almacenar las ubicaciones desde la API
   carreras: any[] = []; // Arreglo para almacenar todas las carreras
   carreraSeleccionada1: any = null; // Variable para la primera carrera seleccionada
@@ -71,6 +75,25 @@ export class PagePrincipalComponent {
       error: (err) => {
         console.error('Error al obtener la información del usuario', err);
       }
+    });
+  }
+
+
+  
+  ngAfterViewInit() {
+    this.menuBtn.nativeElement.addEventListener('click', () => {
+      this.sideMenu.nativeElement.style.display = 'block';
+    });
+
+    this.closeBtn.nativeElement.addEventListener('click', () => {
+      this.sideMenu.nativeElement.style.display = 'none';
+    });
+
+    this.themeToggler.nativeElement.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme-variables');
+
+      this.themeToggler.nativeElement.querySelector('span:nth-child(1)').classList.toggle('active');
+      this.themeToggler.nativeElement.querySelector('span:nth-child(2)').classList.toggle('active');
     });
   }
   }
