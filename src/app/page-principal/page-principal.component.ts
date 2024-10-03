@@ -61,14 +61,28 @@ export class PagePrincipalComponent {
     const target = event.target as HTMLSelectElement;
     const carreraId = target.value;
     if (carreraId) {
-      this.http.get<any>(`https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/carreras/carreraporID/${carreraId}`)
-        .subscribe(carrera => this.carreraSeleccionada2 = carrera); // Asignar la segunda carrera seleccionada
+      this.http.get<any>(`http://localhost:8080/api/v1/carreras/carreraporID/${carreraId}`)
+        .subscribe(carrera => {
+          this.carreraSeleccionada2 = carrera; // Asignar la segunda carrera seleccionada
+          // Resetea la primera carrera si es igual a la segunda seleccionada
+          if (this.carreraSeleccionada1 && this.carreraSeleccionada1.id === carreraId) {
+            this.carreraSeleccionada1 = null;
+          }
+        });
     }
   }
 
+
+  clearSelections(): void {
+    this.carreraSeleccionada1 = null;
+    this.carreraSeleccionada2 = null;
+  }
+
+
   get filteredCarreras() {
     return this.carreras.filter(carrera => 
-      !this.carreraSeleccionada1 || carrera.id !== this.carreraSeleccionada1.id
+      (!this.carreraSeleccionada1 || carrera.id !== this.carreraSeleccionada1.id) &&
+      (!this.carreraSeleccionada2 || carrera.id !== this.carreraSeleccionada2.id)
     );
   }
 
