@@ -14,37 +14,28 @@ import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 })
 
 export class LoginComponent {
+  email: string = '';
+  password: string = '';
   errorMessage: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private authService: AuthService,private http: HttpClient, private router: Router) {}
 
-  onSubmit(form: NgForm) { //NgForm representa el formulario reactivo de angular
-    if (form.valid) {  //verifica si el formulario es valido
-      const { email, password } = form.value;  //desestructura los valores del formulario, extrayendo email y password del objeto form.value
-      
-     
-      const params = new HttpParams()
-        .set('email', email)
-        .set('password', password);  //crea parametros para se usaran para enviar en la solicitud
-  
-     
-      this.http.post('https://orientacionvocacionalinsoapi-production.up.railway.app/api/v1/auth/login', null, {  //realiza la solicitud, null es que no se envia el cuerpo de la solicitud ya que se envian como parametros
-          params, 
-          responseType: 'text'
-        })
-        .subscribe(
-          response => {
-            console.log('Login exitoso:', response);
-            this.errorMessage = null;
-            setTimeout(() => {
-               this.router.navigate(['/pageprincipal']); //permita navegar a la ruta establecida
-                }, 1000);
-          },
-          error => {
-            console.error('Error de login:', error);
-            this.errorMessage = 'Credenciales incorrectas.'; //establece un mensaje de erroe que se muestra en la interfaz
-          }
-        );
+
+
+  login(): void {
+    if (!this.email || !this.password) {
+      console.error('Email y contraseña son requeridos');
+      return;
     }
+  
+    this.authService.login(this.email, this.password, (token) => {
+      console.log('Token recibido en el callback:', token);
+    }).subscribe({
+      next: () => this.router.navigate(['/pageprincipal']),
+      error: (err) => {
+        console.error('Login Failed', err);
+        this.errorMessage = 'Error de autenticación. Por favor, revisa tus credenciales.';
+      }
+    });
   }
 }

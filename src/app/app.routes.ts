@@ -7,28 +7,56 @@ import { PagePrincipalComponent } from './page-principal/page-principal.componen
 import { PerfilComponent } from './authentication/perfil/perfil.component';
 import { ForgotPasswordComponent } from './authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
+import { authGuard } from './authentication/guards/auth.guard';
+import { authenticatedGuard } from './authentication/guards/authenticated.guard';
 export const routes: Routes = [
 //se definen las rutas para navegar entre los componentes
 {
     path: 'login',
-    component: LoginComponent
-
+    title: 'Iniciar Sesion',
+    component: LoginComponent,
+    canActivate: [authenticatedGuard]
+   // children:[
+    //    {
+        //    path:'pageprincipal',
+      //      title: 'Pagina Principal',
+          //  component: PagePrincipalComponent,
+            //children:[
+              //  {
+                //    path: 'profile/:id',
+                  //  component: PerfilComponent
+                //}
+            //]
+       // }
+    //]
 },
 {
     path: 'test',
     component: VocationalTestComponent
 },
 {
-    path: 'registro',
-    component: RegisterComponent
+    path: 'testpageprincipal',
+    component: VocationalTestComponent,
+    canActivate: [authGuard]
 },
+{
+    path: 'registro',
+    title: 'Registrarse',
+    component: RegisterComponent,
+    canActivate: [authenticatedGuard]
+},
+
 {
     path:'pageprincipal',
-    component: PagePrincipalComponent
+    title: 'Pagina Principal',
+    component: PagePrincipalComponent,
+    canActivate: [authGuard]
 },
+
 {
-    path: 'pageprincipal/profile/:id',
-    component: PerfilComponent
+    path: 'profile',
+    component: PerfilComponent,
+    canActivate: [authGuard]
 },
 {
     path: 'forgot-password',
@@ -44,6 +72,7 @@ export const routes: Routes = [
 },
 {
     path:'home',
-    component: HomePageComponent
+    component: HomePageComponent,
+    canActivate: [authenticatedGuard]
 }
 ];

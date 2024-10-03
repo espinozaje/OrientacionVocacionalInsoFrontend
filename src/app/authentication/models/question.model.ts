@@ -22,8 +22,6 @@ export interface Carrera {
     id: number;
     ciudad: string;
   };
-
-  
 }
 
 
@@ -35,9 +33,24 @@ export interface Ubicacion {
 }
 
 export interface User{
+  id?: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password?: string;
+}
+
+
+export interface Asesor{
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  especialidad: string;
+}
+
+export interface LoginResponse {
+  message: string;
+  token: string;
 }
